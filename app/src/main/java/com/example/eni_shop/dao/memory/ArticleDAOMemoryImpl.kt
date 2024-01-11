@@ -32,5 +32,10 @@ class ArticleDAOMemoryImpl : ArticleDAO {
         return article.id
     }
 
+    override fun selectAll(): List<Article> {
+        return articlesInMemory
+    }
+
+
 
 }

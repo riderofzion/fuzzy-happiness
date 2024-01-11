@@ -18,6 +18,10 @@ object ArticleRepository {
         return articleDAO?.addNewOne(article)
     }
 
+    fun getAllArticle() : List<Article>? {
+        return articleDAO?.selectAll()
+    }
+
 }
 
 
