@@ -39,12 +39,13 @@ class ListeArticleFragment : Fragment() {
                 tv.text = a.titre
                 view.findViewById<LinearLayout>(R.id.linearLayoutListeArticle).addView(tv)
             }
-        }
 
-        binding.buttonDetailArticle.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.actionListeToDetail)
+            binding.buttonDetailArticle.setOnClickListener {
+                val article = articles.random()
+                val direction = ListeArticleFragmentDirections.actionListeToDetail(article)
+                Navigation.findNavController(view).navigate(direction)
+            }
         }
-
     }
 
 
