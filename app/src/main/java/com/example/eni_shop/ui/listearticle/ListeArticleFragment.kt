@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.eni_shop.R
 import com.example.eni_shop.databinding.FragmentListeArticleBinding
@@ -15,7 +16,7 @@ import com.example.eni_shop.repository.ArticleRepository
 
 
 class ListeArticleFragment : Fragment() {
-
+    val vm by viewModels<ListeArticleViewModel>()
     lateinit var binding: FragmentListeArticleBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +31,7 @@ class ListeArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val articles = ArticleRepository.getAllArticle()
+        val articles =vm.getArticleList()
 
         if (articles != null) {
 
@@ -41,9 +42,15 @@ class ListeArticleFragment : Fragment() {
             }
 
             binding.buttonDetailArticle.setOnClickListener {
-                val article = articles.random()
-                val direction = ListeArticleFragmentDirections.actionListeToDetail(article)
-                Navigation.findNavController(view).navigate(direction)
+                val article = vm.getRandomArticle()
+
+                article?.let { art ->
+                    val direction = ListeArticleFragmentDirections.actionListeToDetail(
+                        art
+                    )
+                    Navigation.findNavController(view).navigate(direction)
+                }
+
             }
         }
     }
