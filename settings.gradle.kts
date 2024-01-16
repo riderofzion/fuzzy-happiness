@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ENI-SHOP"
 include(":app")
- 
+include(":mod8tpbonus")
